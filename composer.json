@@ -1,7 +1,7 @@
 {
-	"name": "phile/plugin-xmlsitemap",
+	"name": "phile-cms/plugin-xmlsitemap",
 	"type": "phile-plugin",
 	"require": {
-		"phile/plugin-installer-plugin": "*"
+		"phile-cms/plugin-installer-plugin": "*"
 	}
 }
