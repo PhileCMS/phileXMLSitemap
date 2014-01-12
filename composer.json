@@ -1,0 +1,7 @@
+{
+	"name": "phile/plugin-phileXMLSitemap",
+	"type": "phile-plugin",
+	"require": {
+		"phile/plugin-installer-plugin": "*"
+	}
+}
