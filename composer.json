@@ -1,5 +1,5 @@
 {
-	"name": "phile-cms/plugin-xmlsitemap",
+	"name": "phile/xmlsitemap",
 	"type": "phile-plugin",
     "version": "1.0.0",
     "license": "MIT",
