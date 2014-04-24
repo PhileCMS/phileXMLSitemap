@@ -1,9 +1,12 @@
 <?php
-
+/**
+ * Plugin class
+ */
+namespace Phile\Plugin\Phile\XmlSitemap;
 /**
  * XML Sitemap Plugin
  */
-class PhileXMLSitemap extends \Phile\Plugin\AbstractPlugin implements \Phile\EventObserverInterface {
+class Plugin extends \Phile\Plugin\AbstractPlugin implements \Phile\Gateway\EventObserverInterface {
 	public function __construct() {
 		\Phile\Event::registerEvent('plugins_loaded', $this);
 	}
