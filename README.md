@@ -13,9 +13,10 @@ php composer.phar require phile/xmlsitemap:*
 * Install [Phile](https://github.com/PhileCMS/Phile)
 * Download this repo and drop the content into a new folder `phile/xmlsitemap` under the _Phile plugin directory_ e.g. `plugins/phile/xmlsitemap/`
 
-### 2. Activate plugin
+### 2. Activation
 
 After you have installed the plugin. You need to add the following line to your `config.php` file:
+
 
 ```php
 $config['plugins']['phile\\xmlsitemap'] = array('active' => true);
