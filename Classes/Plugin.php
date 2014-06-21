@@ -26,9 +26,10 @@ class Plugin extends \Phile\Plugin\AbstractPlugin implements \Phile\Gateway\Even
 				header('Content-Type: application/xml; charset=UTF-8');
 				$xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 				foreach( $pages as $page ){
+					$pageUrl = preg_replace('/(^|\/)index$/', '', $page->getUrl());
 					$lastMod = filemtime($page->getFilePath());
 					$xml .= '<url>
-								<loc>' . \Phile\Utility::getBaseUrl() . '/' . $page->getUrl() . '</loc>
+								<loc>' . \Phile\Utility::getBaseUrl() . '/' . $pageUrl . '</loc>
 								<lastmod>' . strftime('%Y-%m-%d', $lastMod) . '</lastmod>
 							</url>';
 				}
