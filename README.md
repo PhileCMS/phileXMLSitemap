@@ -5,7 +5,7 @@ phileXMLSitemap
 
 ### 1.1 Installation (composer)
 ```
-php composer.phar require phile/xmlsitemap:*
+php composer.phar require phile/xmlsitemap:dev-master
 ```
 
 ### 1.2 Installation (Download)
