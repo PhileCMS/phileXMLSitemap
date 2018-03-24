@@ -1,6 +1,6 @@
 # phileXMLSitemap
 
-[![Build Status](https://travis-ci.org/Phile/phileXMLSitemap.svg?branch=master)](https://travis-ci.org/Phile/phileXMLSitemap)
+[![Build Status](https://travis-ci.org/PhileCMS/phileXMLSitemap.svg?branch=master)](https://travis-ci.org/PhileCMS/phileXMLSitemap)
 
 [Phile](https://github.com/PhileCMS/Phile) plugin to generate a XML sitemap
 
