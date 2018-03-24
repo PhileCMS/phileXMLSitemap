@@ -12,7 +12,7 @@ class PluginTest extends TestCase
     {
         $config = new Config([
             'plugins' => [
-                'phile\\xmlsitemap' => [
+                'phile\\xmlSitemap' => [
                     'active' => true
                 ]
             ]
