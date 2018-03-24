@@ -4,40 +4,47 @@
  */
 namespace Phile\Plugin\Phile\XmlSitemap;
 
+use Phile\Core\Container;
+use Phile\Gateway\EventObserverInterface;
+use Phile\Plugin\AbstractPlugin;
+use Phile\Repository\Page as Repository;
+
 /**
  * XML Sitemap Plugin
  */
-class Plugin extends \Phile\Plugin\AbstractPlugin implements \Phile\Gateway\EventObserverInterface {
+class Plugin extends AbstractPlugin implements EventObserverInterface
+{
+    protected $events = ['request_uri' => 'createSitemap'];
 
-	public function __construct() {
-		\Phile\Event::registerEvent('plugins_loaded', $this);
-	}
+    public function createSitemap($data)
+    {
+        if ($data['uri'] !== 'sitemap.xml') {
+            return;
+        }
 
-	public function on($eventKey, $data = null) {
-		// check $eventKey for which you have registered
-		if ($eventKey == 'plugins_loaded') {
-			$uri = $_SERVER['REQUEST_URI'];
-			$uri = str_replace('/' . \Phile\Utility::getInstallPath(), '', $uri);
-			if ($uri == '/sitemap.xml') {
-				$pageRespository = new \Phile\Repository\Page();
-				$pages = $pageRespository->findAll();
+        $router = Container::getInstance()->get('Phile_Router');
 
-				header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
-				header('Content-Type: application/xml; charset=UTF-8');
-				$xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-				foreach( $pages as $page ){
-					$pageUrl = preg_replace('/(^|\/)index$/', '', $page->getUrl());
-					$lastMod = filemtime($page->getFilePath());
-					$xml .= '<url>
-								<loc>' . \Phile\Utility::getBaseUrl() . '/' . $pageUrl . '</loc>
-								<lastmod>' . strftime('%Y-%m-%d', $lastMod) . '</lastmod>
-							</url>';
-				}
-				$xml .= '</urlset>';
-				header('Content-Type: text/xml');
-				echo $xml;
-				exit;
-			}
-		}
-	}
+        $templateVars = ['pages' => []];
+        $pages = (new Repository)->findAll();
+        foreach ($pages as $page) {
+            $templateVars['pages'][] = [
+                'loc' => $router->urlForPage($page->getPageId()),
+                'lastmod' => strftime('%Y-%m-%d', filemtime($page->getFilePath())),
+            ];
+        }
+        $content = $this->renderFile('templates/sitemap.php', $templateVars);
+
+        $response = (new \Phile\Core\Response)
+            ->createHtmlResponse($content)
+            ->withHeader('Content-Type', 'application/xml; charset=UTF-8');
+        $data['response'] = $response;
+    }
+
+    private function renderFile(string $filename, array $vars = []): string
+    {
+        extract($vars);
+        ob_start();
+        include $this->getPluginPath($filename);
+        return ob_get_clean();
+    }
 }

@@ -1,21 +1,18 @@
 {
 	"name": "phile/xmlsitemap",
 	"type": "phile-plugin",
-    "version": "1.0.0",
     "license": "MIT",
     "description": "Google XML Sitemap Generator for PhileCMS",
     "homepage": "http://philecms.com",
     "keywords": ["cms","sitemap","phile","google","xml"],
     "authors": [
         {
-            "name": "Frank Nägler",
-            "email": "mail@naegler.net",
-            "homepage": "http://www.frank-naegler.de",
-            "role": "Developer"
+            "name": "Phile CMS Community",
+            "homepage": "https://github.com/PhileCMS/phileXMLSitemap/graphs/contributors"
         }
     ],
 	"require": {
-        "phile-cms/phile": ">=1",
-        "phile-cms/plugin-installer-plugin": ">=1"
+        "phile-cms/phile": "^1.10",
+        "phile-cms/plugin-installer-plugin": "^1.0"
 	}
 }
